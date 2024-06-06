@@ -1,17 +1,29 @@
-import eslintPluginPrettier from "eslint-plugin-prettier";
+import {default as jsonc, parseForESLint} from "eslint-plugin-jsonc";
 
-export default [
-    {
-        // ...other config
-        languageOptions: {
-            parser: eslintPluginPrettier
-        },
-        plugins: {eslintPluginPrettier},
-        rules: {
-            "prettier/prettier": "error"
+const parsers = {
+  'jsonc-eslint-parser': {
+    parseForESLint
+  }
+}
 
+export default [{
+    // files:   ["**/*.json", "**/*.jsonc", "**/*.json5"],
+    plugins: {
+      jsonc: { ...jsonc, parsers}
+      /* same as
+      jsonc: {
+        parsers: {
+          'jsonc-eslint-parser': {
+            parseForESLint
+          }
         }
+      } */
+    },
+    languageOptions: {
+       parser: 'jsonc/jsonc-eslint-parser'
+    },
+    rules: {
+        "prettier/prettier": "error"
 
-        // ...other config
     }
-];
+  }];
