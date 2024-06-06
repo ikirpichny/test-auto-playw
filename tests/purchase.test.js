@@ -1,9 +1,9 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 import { test, expect, chromium } from '@playwright/test';
-const path = require('path');
-const { DemoPage } = require('../pages/DemoPage');
-const { LoginPage } = require('../pages/LoginPage');
+import path from 'path';
+import { DemoPage } from '../pages/DemoPage';
+import { LoginPage } from '../pages/LoginPage';
 
 const email = process.env.EMAIL;
 const code = process.env.CODE;
@@ -32,7 +32,7 @@ test.beforeEach(async ({}, testInfo) => {
     }
 });
 
-test.afterEach(async ({ context }, testInfo) => {
+test.afterEach(async ({ context }) => {
     if (context.browser && typeof context.browser.close === 'function') {
         try {
             await context.browser.close();

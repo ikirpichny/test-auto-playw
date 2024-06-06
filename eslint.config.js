@@ -1,29 +1,20 @@
-import {default as jsonc, parseForESLint} from "eslint-plugin-jsonc";
+// eslint.config.js
+import js from "@eslint/js";
 
-const parsers = {
-  'jsonc-eslint-parser': {
-    parseForESLint
-  }
-}
-
-export default [{
-    // files:   ["**/*.json", "**/*.jsonc", "**/*.json5"],
-    plugins: {
-      jsonc: { ...jsonc, parsers}
-      /* same as
-      jsonc: {
-        parsers: {
-          'jsonc-eslint-parser': {
-            parseForESLint
-          }
+export default [
+    js.configs.recommended,
+    {       
+        languageOptions: {
+          globals: {
+            console: "writable",
+            __dirname: "readable",
+            __filename: "readable",
+            process: "readable",
+      }
+    },
+        rules: {
+            "no-unused-vars": "warn",
+            "no-empty-pattern": "off"
         }
-      } */
-    },
-    languageOptions: {
-       parser: 'jsonc/jsonc-eslint-parser'
-    },
-    rules: {
-        "prettier/prettier": "error"
-
     }
-  }];
+];

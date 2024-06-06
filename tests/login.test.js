@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
-const { DemoPage } = require('../pages/DemoPage');
-const { LoginPage } = require('../pages/LoginPage');
+import { test } from '@playwright/test';
+import { DemoPage } from '../pages/DemoPage';
+import { LoginPage } from '../pages/LoginPage';
 
 test('open in new tab', async ({ browser }) => {
   const context = await browser.newContext();
