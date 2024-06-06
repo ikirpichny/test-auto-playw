@@ -44,5 +44,5 @@ class DemoPage {
     }
   }
   
-  module.exports = { DemoPage };
+  export default { DemoPage };
   
