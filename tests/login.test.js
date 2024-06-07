@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import { DemoPage } from 'test-automation-playwright/pages/demoPage.js';
-import { LoginPage } from 'test-automation-playwright/pages/loginPage.js';
+import { DemoPage } from '..DemoPage.js';
+import { LoginPage } from '..LoginPage.js';
 
 test('open in new tab', async ({ browser }) => {
   const context = await browser.newContext();
