@@ -44,5 +44,5 @@ class DemoPage {
     }
   }
   
-  export default { DemoPage };
+  export { DemoPage };
   

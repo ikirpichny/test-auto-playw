@@ -34,5 +34,5 @@ class LoginPage {
     }
   }
   
-  export default { LoginPage };
+  export { LoginPage };
   
