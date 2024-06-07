@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 import { test, expect, chromium } from '@playwright/test';
 import path from 'path';
-import { DemoPage } from '../pages/demoPage';
-import { LoginPage } from '../pages/loginPage';
+import { DemoPage } from '../pages/demoPage.js';
+import { LoginPage } from '../pages/loginPage.js';
 
 const email = process.env.EMAIL;
 const code = process.env.CODE;
