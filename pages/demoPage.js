@@ -1,3 +1,7 @@
+import 'dotenv/config';
+
+const baseUrl = process.env.BASE_URL;
+
 class DemoPage {
     constructor(page) {
       this.page = page;
@@ -7,10 +11,11 @@ class DemoPage {
       this.submitButtonSelector = 'button:has-text("Submit")';
       this.iframeSelector = 'iframe';
       this.payrowSelector = 'payrow';
+      this.logoutButtonTextWithUserName = 'button:has-text("Logout(frwy-turkey#949dc8)")';
     }
   
     async goto() {
-      await this.page.goto('https://sandbox-platform.faraway.com/demo/');
+      await this.page.goto(baseUrl + '/demo/');
     }
   
     async connectInNewTab() {

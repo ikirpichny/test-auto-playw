@@ -1,23 +1,50 @@
-import { test } from '@playwright/test';
+import 'dotenv/config';
+
+import { expect, test, chromium } from '@playwright/test';
 import { DemoPage } from '../pages/DemoPage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 
-test('open in new tab', async ({ browser }) => {
-  const context = await browser.newContext();
+const email = process.env.EMAIL;
+const code = process.env.CODE;
+const baseUrl = process.env.BASE_URL;
+let browser;
+let context;
+
+test.beforeAll(async () => {
+  try {
+    browser = await chromium.launch({ headless: false });
+    context = await browser.newContext();
+} catch (error) {
+    console.error('Failed to launch browser:', error);
+  }
+});
+  
+test.afterAll(async () => {
+if (browser) {
+    try {
+    await browser.close();
+    } catch (error) {
+    console.error('Failed to close browser:', error);
+    }
+}
+});
+
+test('open in new tab', async () => {
   const page = await context.newPage();
   const demoPage = new DemoPage(page);
 
-  const email = 'ta.test.assignment@faraway.com';
-  const code = '378934';
-
   await demoPage.goto();
+  await expect(page).toHaveURL(baseUrl + '/demo/');
 
   const [newPage] = await Promise.all([
     context.waitForEvent('page'),
-    demoPage.connectInNewTab(),
+    demoPage.connectInNewTab()
   ]);
+  await expect(newPage).toBeTruthy();
 
   const loginPage = new LoginPage(await newPage);
 
   await loginPage.loginWithEmail(email, code);
+
+  await expect(demoPage.logoutButtonTextWithUserName).toBeDefined();
 });
