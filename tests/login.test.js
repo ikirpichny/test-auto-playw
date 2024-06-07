@@ -12,7 +12,7 @@ let context;
 
 test.beforeAll(async () => {
   try {
-    browser = await chromium.launch({ headless: false });
+    browser = await chromium.launch({ headless: true });
     context = await browser.newContext();
 } catch (error) {
     console.error('Failed to launch browser:', error);
